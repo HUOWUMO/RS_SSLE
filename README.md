@@ -47,7 +47,7 @@ datasets
 Houston dataset:
 ```
 python Sample_Synthesis_H13.py
-python python train.py --data_path ./datasets/Houston/ --source_name Houston13 --target_name Houston18 --re_ratio 5 --training_sample_ratio 0.8 --flip_augmentation --radiation_augmentation
+python train.py --data_path ./datasets/Houston/ --source_name Houston13 --target_name Houston18 --re_ratio 5 --training_sample_ratio 0.8 --flip_augmentation --radiation_augmentation
 ```
 Pavia dataset:
 ```
