@@ -11,11 +11,11 @@ The difficulty of generalizing to unknown domains for cross-scene HSI classifica
 
 ## Requirements
 
-CUDA Version: 11.8
+CUDA Version: 11.7
 
 torch: 2.0.0
 
-Python: 3.8
+Python: 3.10
 
 ## Dataset
 
@@ -46,10 +46,12 @@ datasets
 
 Houston dataset:
 ```
-python train.py --data_path ./datasets/Houston/ --source_name Houston13 --target_name Houston18 --re_ratio 5 --dim1 128 --dim2 8 --flip_augmentation --radiation_augmentation
+python Sample_Synthesis_H13.py
+python python train.py --data_path ./datasets/Houston/ --source_name Houston13 --target_name Houston18 --re_ratio 5 --training_sample_ratio 0.8 --flip_augmentation --radiation_augmentation
 ```
 Pavia dataset:
 ```
-python train.py --data_path ./datasets/Pavia/ --source_name paviaU --target_name paviaC --re_ratio 1 --dim1 8 --dim2 16 --flip_augmentation --radiation_augmentation
+python Sample_Synthesis_PU.py
+python train.py --data_path ./datasets/Pavia/ --source_name paviaU --target_name paviaC --re_ratio 1 
 ```
 
