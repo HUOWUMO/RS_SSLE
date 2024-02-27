@@ -54,13 +54,11 @@ class Synthesis(nn.Module):
 
         y_buff2[0] = y_buff1[0]
 
-        # 先移动特别的y[1]
-
         y_buff2[1] = y_buff1[1] - self.ni * (
                 (1 - self.beta) * (-2 * y_buff1[0] + 5 * y_buff1[1] - 4 * y_buff1[2] + y_buff1[3]) + self.beta * (
                 y_buff1[1] - y[1]))
 
-        # 后面一视同仁
+
         for n in range(2, self.N - 2):
             y_buff2[n] = y_buff1[n] - self.ni * ((1 - self.beta) * (
                     1 * y_buff1[n - 2] - 4 * y_buff1[n - 1] + 6 * y_buff1[n] - 4 * y_buff1[n + 1] + 1 * y_buff1[
@@ -74,12 +72,12 @@ class Synthesis(nn.Module):
 
             y_buff2[0] = y_buff1[0]
 
-            # 移动特别的y[1]
+
             y_buff2[1] = y_buff1[1] - self.ni * ((1 - self.beta) * (
                     -2 * y_buff1[0] + 5 * y_buff1[1] - 4 * y_buff1[2] + y_buff1[3]) + self.beta * (
                                                          y_buff1[1] - y[1]))
 
-            # 后面一视同仁
+
             for n in range(2, self.N - 2):
                 y_buff2[n] = y_buff1[n] - self.ni * ((1 - self.beta) * (
                         1 * y_buff1[n - 2] - 4 * y_buff1[n - 1] + 6 * y_buff1[n] - 4 * y_buff1[n + 1] + 1 *
