@@ -20,7 +20,6 @@ class Generator_Gaussian(nn.Module):
         kernel = torch.FloatTensor(gaussian_kernel_2D).expand(inchannel, patch_size, patch_size)  # 复制扩展高斯核
         self.weight = nn.Parameter(data=kernel, requires_grad=re_grad_weight)  #
 
-        # 设置比例权重
         self.alpha = nn.Parameter(torch.tensor(init_alpha), requires_grad=re_grad_alpha)  # [0.0,False]等价于原始鉴别器
 
     def forward(self, x):  # 前向传播默认test模式
