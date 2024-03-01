@@ -142,7 +142,8 @@ def experiment():
     for i in range(0, m):
         for j in range(0, n):
             img_src_synthesis[i, j, :] = S_net(img_src[i, j, :])
-
+        if i % 20 == 0:
+            print('... ... row ', i, ' handling ... ...')
     np.save("datasets/Houston/img_src_synthesis_H13.npy", img_src_synthesis)
 
     # =============可视化合成结果=============
