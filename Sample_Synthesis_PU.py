@@ -139,7 +139,8 @@ def experiment():
     for i in range(0, m):
         for j in range(0, n):
             img_src_synthesis[i, j, :] = S_net(img_src[i, j, :])
-
+        if i % 20 == 0:
+            print('... ... row ', i, ' handling ... ...')
     # 保存一次
     np.save("datasets/Pavia/img_src_synthesis_PU.npy", img_src_synthesis)
 
