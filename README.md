@@ -40,18 +40,21 @@ datasets
 
 1.You can download [Houston &amp; Pavia](https://drive.google.com/drive/folders/1No-DNDT9P1HKsM9QKKJJzat8A1ZhVmmz?usp=sharing) dataset here.
 
-2.You can change the `source_name` and `target_name` in train.py to set different transfer tasks.
+2.Run the following command:
 
-3.Run the following command:
 
-Houston dataset:
+Prepare synthetic samples in advance：
 ```
 python Sample_Synthesis_H13.py
+python Sample_Synthesis_PU.py
+```
+
+Train on Houston dataset:
+```
 python train.py --data_path ./datasets/Houston/ --source_name Houston13 --target_name Houston18 --re_ratio 5 --training_sample_ratio 0.8 --flip_augmentation --radiation_augmentation
 ```
-Pavia dataset:
+Train on Pavia dataset:
 ```
-python Sample_Synthesis_PU.py
 python train.py --data_path ./datasets/Pavia/ --source_name paviaU --target_name paviaC --re_ratio 1 
 ```
 
