@@ -1,4 +1,4 @@
-# Invariance-Driven Non-parametric Covariate Expansion for Cross-Scene Hyperspectral Image Classification
+# Non-parametric Spectral-Spatial Augmentation for Cross-Scene Hyperspectral Image Classificationn
 
 <p align='center'>
   <img src='abstract_00.png' width="800px">
