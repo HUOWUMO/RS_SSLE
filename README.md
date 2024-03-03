@@ -45,8 +45,8 @@ datasets
 
 Prepare synthetic samples in advance：
 ```
-python Sample_Synthesis_H13.py
-python Sample_Synthesis_PU.py
+python Augmentation_H13.py
+python Augmentation_PU.py
 ```
 
 Train on Houston dataset:
