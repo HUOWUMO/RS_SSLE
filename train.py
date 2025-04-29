@@ -213,16 +213,12 @@ def experiment():
                                                num_classes=num_classes,
                                                patch_size=hyperparams['patch_size']).to(args.gpu)
 
-    # =================生成器模型配置=================
-
-    # gauss
     G_net = generator.Generator_Gaussian(inchannel=N_BANDS, patch_size=hyperparams['patch_size'], std=args.std, re_grad_weight=False, init_alpha=args.init_alpha, re_grad_alpha=False).to(args.gpu)
 
     # =================模型LOSS与训练优化配置=================
     D_opt = optim.Adam(D_net.parameters(), lr=args.lr)
     cls_criterion = nn.CrossEntropyLoss()
     con_criterion = SupConLoss(device=args.gpu)
-    FocalLoss = MultiFocalLoss(num_class=num_classes, alpha=[1, 1, 1, 1, 1, 1, 1], gamma=2.0, reduction='mean')  # FocalLoss针对不平衡类别,alpha=None即默认全0.5
 
     # =================开始训练=================
     best_acc = 0
@@ -237,10 +233,7 @@ def experiment():
             y = y - 1
             x = x_double[:, 0:N_BANDS, :, :]
             x_synthesis = x_double[:, N_BANDS:N_BANDS * 2, :, :]
-
-            with torch.no_grad():  # 将模型前向传播的代码放到with torch.no_grad()下，就能使pytorch不生成计算图，从而节省不少显存,删除后结果没有变化
-                x_GD = G_net(x)
-
+          
             p_SD, z_SD = D_net(x, mode='train')
             p_GD, z_GD = D_net(x_GD, mode='train')
             p_synthesis, z_synthesis = D_net(x_synthesis, mode='train')
