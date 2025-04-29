@@ -16,7 +16,6 @@ from datasets import get_dataset, HyperX
 from network import discriminator
 from network import generator
 from utils_HSI import sample_gt, metrics, seed_worker
-from unbalanced_loss.focal_loss import MultiFocalLoss
 
 parser = argparse.ArgumentParser(description='PyTorch SDEnet')
 parser.add_argument('--save_path', type=str, default='./results/')
