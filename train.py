@@ -245,18 +245,16 @@ def experiment():
             p_GD, z_GD = D_net(x_GD, mode='train')
             p_synthesis, z_synthesis = D_net(x_synthesis, mode='train')
 
-            # 交叉熵保证精度
-            src_cls_loss = cls_criterion(p_SD, y.long()) + cls_criterion(p_synthesis, y.long())
+            # 交叉熵保证精度，这里严格遵循VRM原则，采用三组交叉熵
+            src_cls_loss = cls_criterion(p_SD, y.long()) + cls_criterion(x_synthesis, y.long()) + cls_criterion(p_GD,
+                                                                                                             y.long())
 
             # 对比学习实现特征聚类
             # 拼在一起的三组特征向量，共享一组标签
             zsrc = torch.cat([z_SD.unsqueeze(1), z_GD.unsqueeze(1), z_synthesis.unsqueeze(1)], dim=1)
             con_loss = con_criterion(zsrc, y, adv=False)
 
-            # FocalLoss面向类别平衡
-            focal_loss = (FocalLoss(p_SD, y.long()) + FocalLoss(p_synthesis, y.long())) * 0.5
-
-            loss1 = src_cls_loss + args.alpha_1*con_loss + args.alpha_2*focal_loss
+            loss1 = src_cls_loss + args.lambda_1 * con_loss
             D_opt.zero_grad()
             loss1.backward()
             D_opt.step()
